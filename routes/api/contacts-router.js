@@ -29,7 +29,7 @@ contactsRouter.get("/:id", async (req, res, next) => {
     const { id } = req.params;
     const result = await contactsService.getContactById(id);
     if (!result) {
-      throw HttpError(404, `Movie with id=${id} not found`);
+      throw HttpError(404, `Contacts with id=${id} not found`);
     }
     res.json(result);
   } catch (error) {
@@ -59,7 +59,7 @@ contactsRouter.put("/:id", async (req, res, next) => {
     const { id } = req.params;
     const result = await contactsService.updateContactById(id, req.body);
     if (!result) {
-      throw HttpError(404, `Movie with id=${id} not found`);
+      throw HttpError(404, `Contacts with id=${id} not found`);
     }
     res.json(result);
   } catch (error) {
