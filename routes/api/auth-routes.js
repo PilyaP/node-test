@@ -2,24 +2,16 @@ import express from "express";
 
 import authController from "../../controllers/auth-controller.js";
 
-import usersSchemas from "../../schemas/users-schemas.js";
-
 import { validateBody } from "../../decorators/index.js";
 import authenticate from "../../middlewares/authenticate.js";
+import authSchema from "../../schemas/authSchema.js";
+import subscriptionSchema from "../../schemas/subscriptionSchema.js";
 
 const authRouter = express.Router();
 
-authRouter.post(
-  "/register",
-  validateBody(usersSchemas.userSignupSchema),
-  authController.signup
-);
+authRouter.post("/register", validateBody(authSchema), authController.signup);
 
-authRouter.post(
-  "/login",
-  validateBody(usersSchemas.userSigninSchema),
-  authController.signin
-);
+authRouter.post("/login", validateBody(authSchema), authController.signin);
 
 authRouter.get("/current", authenticate, authController.getCurrent);
 
@@ -27,7 +19,7 @@ authRouter.post("/logout", authenticate, authController.logout);
 authRouter.patch(
   "/",
   authenticate,
-  validateBody(usersSchemas.subscriptionSchema),
+  validateBody(subscriptionSchema),
   authController.updateSubscription
 );
 

@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import { HttpError } from "../helpers/index.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const { JWT_SECRET } = process.env;
 
