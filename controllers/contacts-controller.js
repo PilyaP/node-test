@@ -10,7 +10,7 @@ const listContacts = async (req, res) => {
     { owner, ...query },
     "-createdAt -updatedAt",
     { skip, limit }
-  ).populate("owner", "email name");
+  ).populate("owner", "email");
   const total = await Contact.where({ owner, ...query }).countDocuments();
   console.log(total);
   res.json(result);
