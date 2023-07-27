@@ -4,13 +4,16 @@ import "dotenv/config";
 import gravatar from "gravatar";
 import User from "../models/user.js";
 import fs from "fs/promises";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 import { HttpError } from "../helpers/index.js";
-
 import { ctrlWrapper } from "../decorators/index.js";
-
 import path from "path";
+import resizeAvatar from "../middlewares/resizeAvatar.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const { JWT_SECRET } = process.env;
 
 const signup = async (req, res) => {
@@ -97,12 +100,6 @@ const updateSubscription = async (req, res) => {
 
   res.json(result);
 };
-
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-import resizeAvatar from "../tmp/index.js";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const avatarsDir = path.join(__dirname, "../", "public", "avatars");
 const updateAvatar = async (req, res) => {
